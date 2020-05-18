@@ -1,0 +1,141 @@
+* {
+  margin: 0;
+  border: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: rgb(19, 27, 37);
+  font-family: "Major Mono Display", monospace;
+  color: #ffffff;
+}
+
+#header {
+  height: 10vh;
+}
+
+.title {
+  padding: 1vh 0 0 1vw;
+}
+
+.giphy {
+  position: absolute;
+  top: 1vh;
+  right: 1vh;
+}
+
+.search-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4vh 0;
+}
+
+#search {
+  font-size: 1.75rem;
+  font-family: "Major Mono Display", monospace;
+  width: 50vw;
+  background: #ffffffa4;
+  border-radius: 8px;
+  padding: 0.25rem;
+  border: none;
+}
+
+#search:focus {
+  background: #ffffffc5;
+  outline: none;
+}
+
+#search:hover {
+  background: #ffffffc5;
+  outline: none;
+}
+
+#search-results {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 8vh 0;
+  visibility: hidden;
+}
+
+#search-results.show {
+  visibility: visible;
+}
+
+#search-results img {
+  height: 300px;
+  width: 300px;
+}
+
+.popup {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  top: 10vh;
+  width: 500px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 1);
+  box-shadow: 0 0 0 100vh rgba(0, 0, 0, 0.856);
+  border-radius: 20px;
+  visibility: hidden;
+}
+
+.popup.active {
+  visibility: visible;
+}
+
+.popup i {
+  text-align: end;
+}
+
+.popup i:hover {
+  color: rgb(68, 192, 201);
+}
+
+#img-popup {
+  padding: 1rem;
+  width: 500px;
+  height: 500px;
+}
+
+@media (max-width: 800px) {
+  .title {
+    font-size: 1.75rem;
+  }
+
+  .giphy {
+    font-size: 0.75rem;
+  }
+  #search {
+    font-size: 1.5rem;
+    width: 80vw;
+  }
+
+  #search-results {
+    padding: 6vh 0;
+  }
+
+  .popup {
+    width: 90%;
+    top: 20%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 1);
+    box-shadow: 0 0 0 500vh rgba(0, 0, 0, 0.856);
+    border-radius: 20px;
+    visibility: hidden;
+  }
+
+  #img-popup {
+    padding: 1rem;
+    width: 100%;
+    margin: auto;
+  }
+}
