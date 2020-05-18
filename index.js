@@ -6,9 +6,8 @@
 // };
 
 const api = {
-  key: "eFDs2QCOWbqZUI2nmuXAmHeJ7klyQzK0&q=",
-  url1: "https://api.giphy.com/v1/gifs/search?api_key=",
-  url2: "",
+  key: "nToCgEWXWhkvyisbiP0ZmX0CiJWNpPZQ&q=",
+  url: "https://api.giphy.com/v1/gifs/search?api_key=",
 };
 
 $("#search").on("keypress", function (e) {
@@ -23,7 +22,7 @@ $("#search").on("keypress", function (e) {
 function results() {
   var searchTerm = $("#search").val();
   $("#search-results").addClass("show");
-  var xhr = $.get(`${api.url1}${api.key}${searchTerm}&limit=30&offset=0&rating=G&lang=en`);
+  var xhr = $.get(`${api.url}${api.key}${searchTerm}&limit=30&offset=0&rating=G&lang=en`);
   xhr.done(function (response) {
     for (i in response.data) {
       $("#search-results").append("<img class='gif' src='" + response.data[i].images.original.url + "'/>");
