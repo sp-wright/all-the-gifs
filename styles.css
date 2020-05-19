@@ -8,6 +8,11 @@ body {
   background-color: rgb(19, 27, 37);
   font-family: "Major Mono Display", monospace;
   color: #ffffff;
+  cursor: default;
+}
+
+img {
+  cursor: pointer;
 }
 
 #header {
@@ -40,6 +45,7 @@ body {
   border-radius: 8px;
   padding: 0.25rem;
   border: none;
+  margin: 0 10px;
 }
 
 #search:focus {
@@ -52,11 +58,79 @@ body {
   outline: none;
 }
 
+.choice-row {
+  display: flex;
+  align-items: center;
+  padding-top: 2vh;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  margin: 0 15px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: rgb(68, 192, 201);
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px rgb(68, 192, 201);
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+.slider.round {
+  border-radius: 15px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
 #search-results {
   display: flex;
   flex-wrap: wrap;
+  width: 85%;
+  margin: auto;
   justify-content: center;
-  padding: 8vh 0;
+  padding: 13vh 0;
   visibility: hidden;
 }
 
@@ -73,7 +147,7 @@ body {
   position: fixed;
   display: flex;
   flex-direction: column;
-  top: 10vh;
+  top: 20vh;
   width: 500px;
   left: 0;
   right: 0;
@@ -117,7 +191,7 @@ body {
   }
 
   #search-results {
-    padding: 6vh 0;
+    padding: 12vh 0;
   }
 
   .popup {

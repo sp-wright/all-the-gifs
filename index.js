@@ -1,38 +1,41 @@
-// const gify = {
-//   key: "eFDs2QCOWbqZUI2nmuXAmHeJ7klyQzK0",
-//   url: "http://api.giphy.com/v1/gifs/search",
-
-//   // ${gify.url}?q=${searchTerm}&api_key=${gify.key}&limit=30
-// };
-
 const api = {
-  key: "nToCgEWXWhkvyisbiP0ZmX0CiJWNpPZQ&q=",
-  url: "https://api.giphy.com/v1/gifs/search?api_key=",
+  key: "/search?api_key=nToCgEWXWhkvyisbiP0ZmX0CiJWNpPZQ&q=",
+  url: "https://api.giphy.com/v1/",
 };
 
 $("#search").on("keypress", function (e) {
+  var searchTerm = e.target.value;
   $(".gif").remove();
   $("#search-results").removeClass("show");
   if (e.keyCode == 13) {
-    results(e.target.value);
+    var selection = $(".checkbox").is(":checked");
+    if (selection === true) {
+      var choice = "stickers";
+    } else {
+      var choice = "gifs";
+    }
+    getGIFS(searchTerm, choice);
     e.target.value = "";
   }
 });
 
-function results() {
-  var searchTerm = $("#search").val();
+function getGIFS(searchTerm, choice) {
+  fetch(`${api.url}${choice}${api.key}${searchTerm}&limit=30&offset=0&rating=G&lang=en`)
+    .then((response) => response.json())
+    .then((info) => {
+      var info = info.data;
+      results(info);
+    });
+}
+
+function results(info) {
   $("#search-results").addClass("show");
-  var xhr = $.get(`${api.url}${api.key}${searchTerm}&limit=30&offset=0&rating=G&lang=en`);
-  xhr.done(function (response) {
-    for (i in response.data) {
-      $("#search-results").append("<img class='gif' src='" + response.data[i].images.original.url + "'/>");
-    }
-  });
+  for (i in info) {
+    $("#search-results").append("<img class='gif' src='" + info[i].images.original.url + "'/>");
+  }
 }
 
 $("#search-results").click(function (e) {
-  console.log(e.originalEvent.srcElement.currentSrc);
-
   var pic = e.originalEvent.srcElement.currentSrc;
   $(".popup").addClass("active");
   $("#img-popup").attr("src", pic);
@@ -41,5 +44,3 @@ $("#search-results").click(function (e) {
 $(".cross").click(function () {
   $(".popup").removeClass("active");
 });
-
-// &limit=25&offset=0&rating=G&lang=en
